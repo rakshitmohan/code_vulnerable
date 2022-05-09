@@ -10,7 +10,7 @@ jobs:
       with:
         go-version: "1.13"
     - name: Snyk monitor 
-      run: snyk auth ${{ secrets.SNYK_TOKEN }}. | cd vuln_node_express-main | snyk test
+      run: snyk auth ${{ secrets.SNYK_TOKEN }}. | snyk test https://github.com/rakshitmohan/code_vulnerable
  
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
