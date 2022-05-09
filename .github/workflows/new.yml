@@ -14,3 +14,6 @@ jobs:
  
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        
+        
+        
