@@ -11,9 +11,12 @@ jobs:
       run: |
         mkdir rename
         ls
+        pwd
     - name: Just checking
       run: |
          ls
+         pwd
          cd rename
          ls
+         pwd
          
