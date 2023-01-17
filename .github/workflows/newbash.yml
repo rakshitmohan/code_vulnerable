@@ -1,0 +1,19 @@
+name: lambdatest-stage-website-CI/CD
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: copy files
+      run: |
+        cd out/
+        mkdir rename
+        ls
+    - name: Just checking
+      run: |
+         ls
+         cd rename
+         
