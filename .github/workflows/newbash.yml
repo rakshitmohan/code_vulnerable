@@ -1,4 +1,4 @@
-name: lambdatest-stage-website-CI/CD
+name: test_workflow
 on: 
   workflow_dispatch:
 
@@ -9,7 +9,6 @@ jobs:
     - uses: actions/checkout@v1
     - name: copy files
       run: |
-        cd out/
         mkdir rename
         ls
     - name: Just checking
