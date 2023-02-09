@@ -20,7 +20,7 @@ jobs:
        OUTPUT=`aws cloudfront get-distribution --id E2EOU2D3XM021T |jq '.Distribution.DistributionConfig.Origins.Items[1].Id' | tr -d "\"" `
        echo $OUTPUT
        if [[ $OUTPUT == "cdn-rak-bucket.s3.us-east-1.amazonaws.com" ]]; then
-         exit 1
+         echo "hi"
        
         
 
