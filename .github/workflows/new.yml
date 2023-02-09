@@ -17,10 +17,8 @@ jobs:
         aws-region: us-east-1
     - name: Checking if origin is correct
       run: |
-       OUTPUT=`aws cloudfront get-distribution --id E2EOU2D3XM021T |jq '.Distribution.DistributionConfig.Origins.Items[1].Id' | tr -d "\"" )`
+       OUTPUT=`aws cloudfront get-distribution --id E2EOU2D3XM021T |jq '.Distribution.DistributionConfig.Origins.Items[1].Id' | tr -d "\"" `
        echo $OUTPUT
-       #if ${{ ()}} == 'true';then
-       #exit 1
         
 
 
