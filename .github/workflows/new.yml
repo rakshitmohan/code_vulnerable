@@ -21,7 +21,7 @@ jobs:
        echo $OUTPUT
        if [[ $OUTPUT == "cdn-rak-bucket.s3.us-east-1.amazonaws.com" ]]; then
          echo "hi"
-       
+       fi
         
 
 
