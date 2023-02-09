@@ -1,14 +1,26 @@
-name: Example workflow for Node using Snyk
-on: push
+name: stage-website-CI/CD
+on: 
+  workflow_dispatch:
+env: 
+ BUILDNUMBER: ${{github.run_number}}
+ OriginPath: "/${{github.run_number}}"
 jobs:
-  security:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master 
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/node@master
-      - name: Delete file 
-        run: rm .git && ls 
+    - uses: actions/checkout@v1
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+    - name: Checking if origin is correct
+      run: |
+       if ${{ (aws cloudfront get-distribution --id E2EOU2D3XM021T |jq '.Distribution.DistributionConfig.Origins.Items[1].Id' | tr -d "\"" !=  
+          rakpoctest.s3.us-east-1.amazonaws.com)}} == 'true';then
+       exit 1
         
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+
+  
