@@ -24,7 +24,7 @@ jobs:
        fi
     - name: Removing the directories
       run: |
-       ANS='aws s3 ls s3://rakpoctest/ | awk '{if ($NF ~ /\/$/) print $NF}' | sort | wc -l`
+       ANS=`aws s3 ls s3://rakpoctest/ | awk '{if ($NF ~ /\/$/) print $NF}' | sort | wc -l`
        count=$((ANS-2))
        aws s3 ls s3://rakpoctest/ | awk '{if ($NF ~ /\/$/) print $NF}' | sort | head -n $count | xargs -I {} aws s3 rm s3://rakpoctest/{} --recursive
       
