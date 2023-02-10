@@ -19,10 +19,14 @@ jobs:
       run: |
        OUTPUT=`aws cloudfront get-distribution --id E2EOU2D3XM021T |jq '.Distribution.DistributionConfig.Origins.Items[1].Id' | tr -d "\"" `
        echo $OUTPUT
-       if [[ $OUTPUT == "cdn-rak-bucket.s3.us-east-1.amazonaws.com" ]]; then
+       if [[ $OUTPUT != "cdn-rak-bucket.s3.us-east-1.amazonaws.com" ]]; then
          exit 1
        fi
-        
+    - name: Removing the directories
+      run: |
+       ANS='aws s3 ls s3://rakpoctest/ | awk '{if ($NF ~ /\/$/) print $NF}' | sort | wc -l`
+       aws s3 ls s3://rakpoctest/ | awk '{if ($NF ~ /\/$/) print $NF}' | sort | head -n $(($ANS-2)) | xargs -I {} aws s3 rm s3://rakpoctest/{} --recursive
+      
 
 
   
